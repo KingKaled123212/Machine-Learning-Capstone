@@ -1,0 +1,67 @@
+# Configuration file for Deep Learning Benchmark
+# Modify these parameters to run different experiments
+
+# Dataset selection: 'adult', 'cifar10', 'pcam'
+dataset: 'adult'
+
+# Architecture selection: 'mlp', 'cnn', 'attention' (attention is bonus)
+architecture: 'mlp'
+
+# Training hyperparameters
+training:
+  batch_size: 64
+  num_epochs: 50
+  learning_rate: 0.001
+  optimizer: 'adam'  # adam, sgd
+  weight_decay: 0.0001
+  
+  # Early stopping
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.001
+
+# Data splits
+data:
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+  random_seed: 42
+
+# Model-specific parameters
+model:
+  mlp:
+    hidden_dims: [256, 128, 64]
+    dropout: 0.3
+    use_batch_norm: true
+  
+  cnn:
+    conv_channels: [32, 64, 128]
+    kernel_sizes: [3, 3, 3]
+    pool_sizes: [2, 2, 2]
+    fc_dims: [256, 128]
+    dropout: 0.3
+    use_batch_norm: true
+  
+  attention:
+    d_model: 128
+    num_heads: 4
+    num_layers: 2
+    dropout: 0.1
+    fc_dims: [128, 64]
+
+# Paths
+paths:
+  data_dir: './data'
+  results_dir: './results'
+  checkpoint_dir: './checkpoints'
+  log_dir: './logs'
+
+# Device
+device: 'cuda'  # cuda or cpu if cuda not available
+
+# Logging
+logging:
+  use_tensorboard: true
+  print_every: 10  # batches
+  save_best_model: true
