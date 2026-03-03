@@ -1,0 +1,43 @@
+# YOLOv8n Configuration
+model:
+  name: yolov8n
+  pretrained: true                  # pretrained on COCO
+
+training:
+  epochs: 20
+  batch_size: 16                    # reduce to 8 if OOM
+  num_workers: 4
+  mixed_precision: true             # AMP enabled
+  patience: 5                       # early stopping patience
+  cos_lr: true                      # cosine LR schedule
+  warmup_epochs: 3
+  warmup_momentum: 0.8
+  warmup_bias_lr: 0.1
+
+optimizer:
+  type: AdamW
+  lr: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+
+augmentation:
+  mosaic: 1.0                       # mosaic augmentation probability
+  copy_paste: 0.0
+  degrees: 0.0
+  translate: 0.1
+  scale: 0.5
+  fliplr: 0.5
+  flipud: 0.0
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+
+data:
+  image_size: 512
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+
+output:
+  save_dir: outputs/yolo
+  save_best_only: true

@@ -1,0 +1,43 @@
+# Faster R-CNN Configuration
+model:
+  name: faster_rcnn_mobilenet_v3_large_fpn
+  pretrained: true
+  trainable_backbone_layers: 3      # fine-tune last 3 backbone layers
+
+training:
+  epochs: 15
+  batch_size: 4                     # reduce to 2 if OOM
+  num_workers: 4
+  mixed_precision: true             # fp16 to save VRAM
+
+optimizer:
+  type: SGD
+  lr: 0.005
+  momentum: 0.9
+  weight_decay: 0.0005
+
+scheduler:
+  type: StepLR
+  step_size: 5
+  gamma: 0.5
+
+early_stopping:
+  patience: 5
+  monitor: val_map
+
+data:
+  image_size: 512
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+
+augmentation:
+  horizontal_flip: 0.5
+  brightness_jitter: 0.2
+  contrast_jitter: 0.2
+  random_crop: true
+
+output:
+  save_dir: outputs/faster_rcnn
+  log_dir: outputs/faster_rcnn/logs
+  save_best_only: true
