@@ -160,6 +160,7 @@ class YOLOWrapper:
         sample_paths = [str(p) for p in sample]
 
         # Warm-up
+        if not sample_paths: return 0.0
         _ = self.model.predict(sample_paths[:2], imgsz=image_size, verbose=False, device=self.device)
 
         # Time

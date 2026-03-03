@@ -243,7 +243,7 @@ def train(args):
     logger.info(f"Recall    : {test_metrics['recall']:.4f}")
 
     # --- Inference speed ---
-    speed = 0.0
+    speed =  wrapper.inference_speed(yaml_path, n_images=100, image_size=args.image_size)
     logger.info(f"Speed     : {speed:.1f} img/s")
     test_metrics["inference_speed"] = speed
     test_metrics["training_time"]   = t_total.elapsed
