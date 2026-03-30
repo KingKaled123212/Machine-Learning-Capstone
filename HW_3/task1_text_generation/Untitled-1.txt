@@ -1,0 +1,7 @@
+for row in payroll:
+    for row in regist:
+        if (Payroll.userid = Regist.UserID):
+            return (Payroll.name, Payroll.Salary)
+        
+
+SELECT Name, (SELECT )
